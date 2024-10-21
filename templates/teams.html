@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos de la Liga Pro Ecuador</title>
+    <style>
+        /* Estilo general */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://www.example.com/football-stadium-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Estilo para el título principal */
+        h1 {
+            font-size: 3em;
+            color: #ffcc00; /* Color dorado */
+            margin-top: 48px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra en el texto */
+            font-family: 'Helvetica Neue', sans-serif; /* Fuente más moderna y profesional */
+            
+        }
+
+        /* Estilo del logo de la página */
+        .page-logo {
+            position: absolute; /* Posiciona el logo en la parte superior izquierda */
+            top: -36px; /* Mantiene el logo en la parte superior */
+            left: 188px; /* Ajustado para que esté 5px a la izquierda del título */
+            width: 230px; /* Aumentado el tamaño del logo */
+            height: auto; /* Mantiene la proporción */
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 80%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semitransparente */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Estilo de las cabeceras de la tabla */
+        th {
+            background-color: #ffcc00; /* Color dorado */
+            color: #000;
+            padding: 15px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Estilo de las celdas de la tabla */
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Estilo de las filas alternadas */
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1); /* Color más claro */
+        }
+
+        /* Estilo de los enlaces */
+        a {
+            background-color: #28a745; /* Verde */
+            color: #fff; /* Texto blanco */
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 15px; /* Relleno alrededor del texto */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s, transform 0.2s; /* Efecto de transición */
+        }
+
+        a:hover {
+            background-color: #218838; /* Un verde más oscuro al pasar el ratón */
+            transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el ratón */
+        }
+
+        /* Estilo para los logos */
+        .team-logo {
+            width: 70px; /* Aumentar el tamaño del logo para que se vea más */
+            height: auto; /* Mantiene la proporción */
+            vertical-align: middle; /* Alinea verticalmente con el texto */
+        }
+
+        /* Estilo para móviles */
+        @media (max-width: 768px) {
+            table {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 2.2em;
+                margin-left: 0; /* Elimina margen izquierdo en pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='logos/logo.png') }}" alt="Logo de la Liga Pro" class="page-logo"> <!-- Logo de la página -->
+    <h1>Equipos de la Liga Pro Ecuador</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Logo</th> <!-- Nueva columna para el logo -->
+            <th>Nombre</th>
+            <th>Detalles</th> <!-- Eliminada la columna de País -->
+        </tr>
+        {% for team in teams %}
+        <tr>
+            <td>{{ team['team']['id'] }}</td>
+            <td>
+                <img src="{{ url_for('static', filename='logos/' + team['team']['id'] ~ '.png') }}" alt="{{ team['team']['name'] }} Logo" class="team-logo">
+            </td>
+            <td>{{ team['team']['name'] }}</td>
+            <td><a href="{{ url_for('show_team_details', team_id=team['team']['id']) }}">Ver Resultados</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

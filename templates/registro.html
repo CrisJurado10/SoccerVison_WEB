@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+        /* Estilos generales para el cuerpo de la página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://www.example.com/grass-texture.jpg') no-repeat center center fixed; /* Fondo simulando césped */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff; /* Color de texto blanco */
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo negro translúcido */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            width: 400px;
+            margin: auto;
+        }
+
+        .page-logo {
+            width: 140px; /* Tamaño del logo */
+            height: auto;
+            margin: -40px auto -15px; /* Margen superior de 10px, centrado y margen inferior reducido a 10px */
+            display: block; /* Asegurarse de que se trate como un bloque para centrar */
+        }
+
+        h1 {
+            font-size: 2.2em; /* Tamaño de fuente más grande */
+            color: #ffcc00; /* Color amarillo dorado para el título */
+            margin-bottom: 20px;
+            font-family: 'Tahoma', sans-serif;
+            margin-top: -3px; /* Ajusta este valor para mover el título hacia arriba */
+            display: inline-flex; /* Cambiar a inline-flex para mantener la alineación */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+        }
+
+        .futbol-icon {
+            margin: 0 10px; /* Espaciado entre el título y las pelotas */
+        }
+
+        label {
+            color: #fff;
+            font-size: 1.2em; /* Aumento en el tamaño de la fuente */
+            display: block; /* Hacer que el label ocupe todo el ancho */
+            text-align: center; /* Centrar el texto del label */
+            margin: 15px 0 5px; /* Espaciado entre el label y el input */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 24px); /* Ajustar el ancho para el padding */
+            padding: 12px;
+            margin: 10px auto; /* Alinear el margen a la parte superior e inferior y centrar horizontalmente */
+            border-radius: 5px;
+            border: 1px solid #ccc; /* Borde más visible */
+            background-color: #fff; /* Cambiar el fondo a blanco */
+            color: #333; /* Color de texto más oscuro */
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border: 2px solid #007bff; /* Borde azul al enfocarse */
+        }
+
+        button {
+            background-color: #28a745; /* Verde deportivo */
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px; /* Margen superior para el botón */
+        }
+
+        button:hover {
+            background-color: #218838; /* Cambio de color al pasar el mouse */
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffcc00; /* Amarillo dorado */
+            font-size: 0.9em;
+        }
+
+        a:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        p {
+            color: #ff0000;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Imagen del logo centrada -->
+        <img src="{{ url_for('static', filename='logos/logo.png') }}" alt="Logo" class="page-logo"> <!-- Logo de la página -->
+        <h1>
+            ⚽Crear una cuenta⚽
+        </h1>
+        <form action="/registro" method="POST">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario..." required>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo..." required>
+
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña..." required>
+
+            <button type="submit">Registrar</button>
+        </form>
+
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+
+        <a href="{{ url_for('login') }}">Volver al inicio de sesión</a>
+    </div>
+</body>
+</html>
